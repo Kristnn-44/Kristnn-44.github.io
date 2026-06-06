@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>年鉴 - Maple Leaf International School-Chongqing</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- PDF.js 核心库和 worker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        // 设置 worker 路径
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- 登录/注册面板 -->
+        <div id="loginPanel" class="panel">
+            <div class="school-header">
+                <h1>Maple Leaf International School-Chongqing</h1>
+                <h2>YEARBOOK DIGITAL EDITION</h2>
+            </div>
+            <!-- 登录表单 -->
+            <div id="loginForm" class="auth-form">
+                <h3>登录</h3>
+                <input type="text" id="loginAccount" placeholder="邮箱 或 手机号" autocomplete="username">
+                <input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password">
+                <button id="loginBtn">登录</button>
+                <p class="toggle-link">还没有账号？<span id="showRegisterBtn">立即注册</span></p>
+            </div>
+            <!-- 注册表单（初始隐藏） -->
+            <div id="registerForm" class="auth-form" style="display:none;">
+                <h3>注册新账号</h3>
+                <input type="text" id="regAccount" placeholder="邮箱 或 手机号" autocomplete="off">
+                <input type="password" id="regPassword" placeholder="密码（至少6位）">
+                <input type="password" id="regConfirmPassword" placeholder="确认密码">
+                <button id="registerBtn">注册</button>
+                <p class="toggle-link">已有账号？<span id="showLoginBtn">返回登录</span></p>
+            </div>
+        </div>
+
+        <!-- 年鉴内容面板（登录后显示） -->
+        <div id="contentPanel" class="panel" style="display:none;">
+            <div class="school-header">
+                <h1>Maple Leaf International School-Chongqing</h1>
+                <h2>YEARBOOK DIGITAL EDITION</h2>
+                <button id="logoutBtn" class="logout-btn">退出登录</button>
+            </div>
+
+            <!-- 年份导航：2020'S + 下拉菜单 -->
+            <div class="decade-nav">
+                <div class="decade-row">
+                    <span class="decade" data-decade="2020">2020'S</span>
+                </div>
+                <div class="year-slider-container">
+                    <label for="yearSelect">选择年份：</label>
+                    <select id="yearSelect" class="year-select">
+                        <!-- 动态生成 2020-2026 -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- PDF 预览容器（canvas + 文本层） -->
+            <div class="yearbook-viewer">
+                <h3 id="yearTitle">请选择年份</h3>
+                <div id="pdfContainer" class="pdf-container">
+                    <p class="hint">请从上方下拉菜单选择年份查看年鉴</p>
+                </div>
+            </div>
+
+            <!-- 管理员面板（仅管理员可见） -->
+            <div id="adminPanel" class="admin-panel" style="display:none;">
+                <div class="admin-header">
+                    <h3>👥 账号管理</h3>
+                    <p>总注册人数：<span id="totalUsersCount">0</span></p>
+                    <button id="refreshAdminBtn" class="small-btn">刷新列表</button>
+                </div>
+                <div id="userListContainer" class="user-list-container"></div>
+            </div>
+
+            <!-- 底部作者信息 -->
+            <div class="extra-info">
+                <div class="author-info">
+                    <h4>Author</h4>
+                    <p>Class of 2026 graduates</p>
+                    <p>Kristen.Pu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
